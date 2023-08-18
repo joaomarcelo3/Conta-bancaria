@@ -1,58 +1,44 @@
 # Conta-bancaria
-    Scanner leitura = new Scanner(System.in);
-    Conta conta = new Conta();
-    {
+  public class Conta {
+    private String nome;
+    private String conta;
+    private double saldo;
 
 
-        System.out.println("Digite seu nome? ");
-        conta.setNome(leitura.nextLine());
-        System.out.println("Digite o tipo da conta ");
-        conta.setConta(leitura.nextLine());
-        System.out.println("Digite o saldo inicial ");
-        conta.setSaldo(leitura.nextDouble());
+    public String getNome() {
+        return nome;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-        String extrato = """
-                *********************************************
-                Dados iniciais do cliente:
-                                
-                Nome: %s
-                Tipo conta: %s
-                Saldo inicial: R$ %.2f
-                *********************************************
-                                
-                """.formatted(conta.getNome(), conta.getConta(), conta.getSaldo());
+    public String getConta() {
+        return conta;
+    }
 
-        String operacoes = """
-                Operações
-                                
-                1- Consultar saldo
-                2- Receber valor
-                3- Tranferir valor
-                4- Sair
-                                
-                Digite a opção desejada:
-                """;
-        System.out.println(extrato);
-        int caso = 0;
-        double valor = 0;
-        while (caso < 4) {
-            System.out.println(operacoes);
-            caso = leitura.nextInt();
-            if (caso == 1) {
-                System.out.println("O saldo atual é R$ " + conta.getSaldo());
-            }
-            if (caso == 2) {
-                System.out.println("Informe o valor a receber: ");
-                conta.recebe(valor = leitura.nextDouble());
-            }
-            if (caso == 3) {
-                System.out.println("Informe o valor que deseja tranferir: ");
-                conta.transfere(valor = leitura.nextDouble());
-            }
-            if (caso == 4) {
-                System.out.println("Saindo...");
-            }
+    public void setConta(String conta) {
+        this.conta = conta;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public void recebe(double valor){
+        this.saldo += valor;
+        System.out.println("Saldo atualizado R$ " + (getSaldo()));
+    }
+    public void transfere(double valor){
+        if (valor > this.saldo){
+            System.out.println("Não há saldo suficiente para fazer essa tranferência, tente novamente!");
+        } else {
+            this.saldo -= valor;
+            System.out.println("Saldo atualizado R$ " + (getSaldo()));
         }
     }
 }
